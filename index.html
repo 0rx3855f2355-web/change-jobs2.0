@@ -24,6 +24,7 @@
       padding: 12px;
       border-bottom: 1px solid #ddd;
       text-align: left;
+      cursor: pointer;
     }
     th {
       background: #0078ff;
@@ -51,28 +52,23 @@
 <body>
 
   <h1>応募企業一覧</h1>
-    <input type="text" id="searchBox" placeholder="企業名で絞り込み" style="padding:10px; width:300px; margin-bottom:20px;">
-<th onclick="sortTable('name')">企業名 ▲</th>
-<th onclick="sortTable('apply_site')">応募サイト ▲</th>
-<th onclick="sortTable('document')">書類選考 ▲</th>
-<th onclick="sortTable('interview1')">一次面接 ▲</th>
-<th onclick="sortTable('interview2')">二次面接 ▲</th>
-<th onclick="sortTable('result')">合否 ▲</th>
 
-
-
+  <!-- 絞り込み検索 -->
+  <input type="text" id="searchBox" placeholder="企業名で絞り込み" 
+         style="padding:10px; width:300px; margin-bottom:20px;">
 
   <a href="add.html" class="add-btn">企業を追加する</a>
 
   <table id="companyTable">
     <thead>
       <tr>
-        <th>企業名</th>
-        <th>応募サイト</th>
-        <th>書類選考</th>
-        <th>一次面接</th>
-        <th>二次面接</th>
-        <th>合否</th>
+        <th>No</th>
+        <th onclick="sortTable('name')">企業名 ▲</th>
+        <th onclick="sortTable('apply_site')">応募サイト ▲</th>
+        <th onclick="sortTable('document')">書類選考 ▲</th>
+        <th onclick="sortTable('interview1')">一次面接 ▲</th>
+        <th onclick="sortTable('interview2')">二次面接 ▲</th>
+        <th onclick="sortTable('result')">合否 ▲</th>
         <th>編集</th>
       </tr>
     </thead>
