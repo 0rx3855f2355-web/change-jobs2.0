@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ステータス編集</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      padding: 20px;
+    }
+    h1 {
+      border-left: 6px solid #0078ff;
+      padding-left: 10px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    select, input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: #0078ff;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #005fcc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ステータス編集</h1>
+
+  <div class="form-group">
+    <label>企業名</label>
+    <input type="text" id="name" disabled>
+  </div>
+
+  <div class="form-group">
+    <label>応募サイト</label>
+    <input type="text" id="apply_site" disabled>
+  </div>
+
+  <div class="form-group">
+    <label>書類選考</label>
+    <select id="document">
+      <option value="未">未</option>
+      <option value="通過">通過</option>
+      <option value="不通過">不通過</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>一次面接</label>
+    <select id="interview1">
+      <option value="未">未</option>
+      <option value="予定">予定</option>
+      <option value="通過">通過</option>
+      <option value="不通過">不通過</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>二次面接</label>
+    <select id="interview2">
+      <option value="未">未</option>
+      <option value="予定">予定</option>
+      <option value="通過">通過</option>
+      <option value="不通過">不通過</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>合否</label>
+    <select id="result">
+      <option value="結果待ち">結果待ち</option>
+      <option value="内定">内定</option>
+      <option value="不採用">不採用</option>
+    </select>
+  </div>
+
+  <button onclick="saveStatus()">保存する</button>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    const companies = JSON.parse(localStorage.getItem("companies")) || [];
+    const company = companies.find(c => c.id == id);
+
+    document.getElementById("name").value = company.name;
+    document.getElementById("apply_site").value = company.apply_site;
+    document.getElementById("document").value = company.status.document;
+    document.getElementById("interview1").value = company.status.interview1;
+    document.getElementById("interview2").value = company.status.interview2;
+    document.getElementById("result").value = company.status.result;
+
+    function saveStatus() {
+      company.status.document = document.getElementById("document").value;
+      company.status.interview1 = document.getElementById("interview1").value;
+      company.status.interview2 = document.getElementById("interview2").value;
+      company.status.result = document.getElementById("result").value;
+
+      localStorage.setItem("companies", JSON.stringify(companies));
+
+      alert("保存しました");
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
