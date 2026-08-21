@@ -59,12 +59,28 @@
 
   <button onclick="addCompany()">追加する</button>
 
-  <script>
-    // 応募サイト → URL の辞書
-    const siteLinks = {
-      "レバテック": "https://levtech-career.com/",
-      "doda": "https://doda.jp/",
-      "マイナビ": "https://mynavi.jp/",
-      "リクナビ": "https://job.rikunabi.com/",
-      "Green": "https://www.green-japan.com/",
-
+    <script>
+        function addCompany() {
+        const name = document.getElementById('name').value.trim();
+        const apply_site = document.getElementById('apply_site').value.trim();
+    
+        if (!name || !apply_site) {
+            alert('企業名と応募サイトを入力してください。');
+            return;
+        }
+    
+        const newCompany = {
+            name: name,
+            apply_site: apply_site,
+            document: '未選択',
+            interview: '未選択',
+            offer: '未選択'
+        };
+    
+        let companies = JSON.parse(localStorage.getItem('companies')) || [];
+        companies.push(newCompany);
+        localStorage.setItem('companies', JSON.stringify(companies));
+    
+        alert('企業が追加されました。');
+        window.location.href = 'index.html';
+        }
