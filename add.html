@@ -53,43 +53,18 @@
   </div>
 
   <div class="form-group">
-    <label>応募サイト</label>
+    <label>応募サイト（例：レバテック / doda / マイナビ）</label>
     <input type="text" id="apply_site">
   </div>
 
   <button onclick="addCompany()">追加する</button>
 
   <script>
-    function addCompany() {
-      const name = document.getElementById("name").value;
-      const apply_site = document.getElementById("apply_site").value;
+    // 応募サイト → URL の辞書
+    const siteLinks = {
+      "レバテック": "https://levtech-career.com/",
+      "doda": "https://doda.jp/",
+      "マイナビ": "https://mynavi.jp/",
+      "リクナビ": "https://job.rikunabi.com/",
+      "Green": "https://www.green-japan.com/",
 
-      if (!name || !apply_site) {
-        alert("企業名と応募サイトを入力してください");
-        return;
-      }
-
-      let companies = JSON.parse(localStorage.getItem("companies")) || [];
-
-      const newCompany = {
-        id: Date.now(),
-        name: name,
-        apply_site: apply_site,
-        status: {
-          document: "未",
-          interview1: "未",
-          interview2: "未",
-          result: "結果待ち"
-        }
-      };
-
-      companies.push(newCompany);
-      localStorage.setItem("companies", JSON.stringify(companies));
-
-      alert("企業を追加しました");
-      window.location.href = "index.html";
-    }
-  </script>
-
-</body>
-</html>
