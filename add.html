@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>企業追加</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      padding: 20px;
+    }
+    h1 {
+      border-left: 6px solid #0078ff;
+      padding-left: 10px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: #0078ff;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #005fcc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>企業追加</h1>
+
+  <div class="form-group">
+    <label>企業名</label>
+    <input type="text" id="name">
+  </div>
+
+  <div class="form-group">
+    <label>応募サイト</label>
+    <input type="text" id="apply_site">
+  </div>
+
+  <button onclick="addCompany()">追加する</button>
+
+  <script>
+    function addCompany() {
+      const name = document.getElementById("name").value;
+      const apply_site = document.getElementById("apply_site").value;
+
+      if (!name || !apply_site) {
+        alert("企業名と応募サイトを入力してください");
+        return;
+      }
+
+      let companies = JSON.parse(localStorage.getItem("companies")) || [];
+
+      const newCompany = {
+        id: Date.now(),
+        name: name,
+        apply_site: apply_site,
+        status: {
+          document: "未",
+          interview1: "未",
+          interview2: "未",
+          result: "結果待ち"
+        }
+      };
+
+      companies.push(newCompany);
+      localStorage.setItem("companies", JSON.stringify(companies));
+
+      alert("企業を追加しました");
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
